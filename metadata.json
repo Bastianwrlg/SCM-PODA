@@ -1,0 +1,6 @@
+{
+  "name": "SCM & Sales Analytics Dashboard",
+  "description": "Interactive Supply Chain Management and Sales Analytics Dashboard with Forecasting, Sales Orders, Quarterly Trends, City-Distributor Breakdown, Brand Volumes, and Product Metrics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
