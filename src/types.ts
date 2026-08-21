@@ -30,8 +30,10 @@ export interface FilterState {
   brands: string[];
   jenisList: string[];
   ukuranList: string[];
-  selectedKota: string;
-  selectedDistributor: string;
+  kotaList: string[];
+  distributorList: string[];
+  selectedKota?: string;
+  selectedDistributor?: string;
   searchQuery: string;
 }
 

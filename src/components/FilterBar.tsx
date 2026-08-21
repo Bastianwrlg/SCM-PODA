@@ -1,6 +1,7 @@
 import React from 'react';
-import { Filter, RotateCcw, Building2, Layers, Check, ChevronDown } from 'lucide-react';
+import { Filter, RotateCcw, X, Layers } from 'lucide-react';
 import { FilterState } from '../types';
+import { MultiSelectDropdown } from './MultiSelectDropdown';
 
 interface FilterBarProps {
   filter: FilterState;
@@ -35,7 +36,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({
     filter.brands.length > 0 ||
     filter.jenisList.length > 0 ||
     filter.ukuranList.length > 0 ||
+    (filter.kotaList && filter.kotaList.length > 0) ||
     Boolean(filter.selectedKota) ||
+    (filter.distributorList && filter.distributorList.length > 0) ||
     Boolean(filter.selectedDistributor) ||
     Boolean(filter.searchQuery);
 
@@ -46,109 +49,39 @@ export const FilterBar: React.FC<FilterBarProps> = ({
       brands: [],
       jenisList: [],
       ukuranList: [],
+      kotaList: [],
+      distributorList: [],
       selectedKota: '',
       selectedDistributor: '',
       searchQuery: ''
     });
   };
 
-  const toggleYear = (year: number) => {
-    const nextYears = filter.years.includes(year)
-      ? filter.years.filter(y => y !== year)
-      : [...filter.years, year];
-    onFilterChange({ ...filter, years: nextYears });
-  };
-
-  const togglePrincipal = (p: string) => {
-    const next = filter.prinsipals.includes(p)
-      ? filter.prinsipals.filter(item => item !== p)
-      : [...filter.prinsipals, p];
-    onFilterChange({ ...filter, computedPrinsipals: next,  prinsipals: next });
-  };
-
-  const toggleBrand = (b: string) => {
-    const next = filter.brands.includes(b)
-      ? filter.brands.filter(item => item !== b)
-      : [...filter.brands, b];
-    onFilterChange({ ...filter, brands: next });
-  };
-
-  const toggleJenis = (j: string) => {
-    const next = filter.jenisList.includes(j)
-      ? filter.jenisList.filter(item => item !== j)
-      : [...filter.jenisList, j];
-    onFilterChange({ ...filter, jenisList: next });
-  };
-
-  const toggleUkuran = (u: string) => {
-    const next = filter.ukuranList.includes(u)
-      ? filter.ukuranList.filter(item => item !== u)
-      : [...filter.ukuranList, u];
-    onFilterChange({ ...filter, ukuranList: next });
-  };
+  const selectedKotaList = filter.kotaList || (filter.selectedKota ? [filter.selectedKota] : []);
+  const selectedDistributorList = filter.distributorList || (filter.selectedDistributor ? [filter.selectedDistributor] : []);
 
   return (
-    <div className="bg-white rounded-xl border border-slate-200/90 p-3.5 sm:p-4 shadow-xs space-y-3">
+    <div className="bg-white rounded-xl border border-slate-200/90 p-4 shadow-xs space-y-3">
       
-      {/* Top row: Years pills, Principal pills, Brands pills, Reset */}
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        
-        {/* Years Selection */}
-        <div className="flex items-center gap-1.5">
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider mr-1">Tahun:</span>
-          <button
-            onClick={() => onFilterChange({ ...filter, years: [] })}
-            className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
-              filter.years.length === 0
-                ? 'bg-slate-900 text-white'
-                : 'bg-slate-100 text-slate-600 hover:bg-slate-200/80'
-            }`}
-          >
-            Semua (3 Tahun)
-          </button>
-          {availableYears.map(year => {
-            const isSelected = filter.years.includes(year);
-            return (
-              <button
-                key={year}
-                onClick={() => toggleYear(year)}
-                className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
-                  isSelected
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200/80'
-                }`}
-              >
-                {year}
-              </button>
-            );
-          })}
+      {/* Slicer Header & Counts */}
+      <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div className="flex items-center gap-2">
+          <div className="p-1 rounded-md bg-indigo-50 text-indigo-600">
+            <Filter className="w-3.5 h-3.5" />
+          </div>
+          <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+            Slicer & Filter Data
+          </span>
+          {isFiltered && (
+            <span className="text-[10px] font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">
+              Filter Aktif
+            </span>
+          )}
         </div>
 
-        {/* Principals Selection */}
-        <div className="flex items-center gap-1.5 flex-wrap">
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider mr-1">Prinsipal:</span>
-          {availablePrinsipals.map(p => {
-            const isSelected = filter.prinsipals.includes(p);
-            return (
-              <button
-                key={p}
-                onClick={() => togglePrincipal(p)}
-                className={`px-2 py-0.8 rounded-md text-xs font-medium transition-colors cursor-pointer ${
-                  isSelected
-                    ? 'bg-emerald-600 text-white shadow-xs'
-                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-                }`}
-              >
-                {p}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Reset button & filtered count */}
-        <div className="flex items-center gap-3 ml-auto">
+        <div className="flex items-center gap-3">
           <span className="text-xs text-slate-500 hidden sm:inline">
-            <strong className="font-semibold text-slate-800">{filteredCount.toLocaleString()}</strong> dari {totalCount.toLocaleString()} baris
+            <strong className="font-semibold text-slate-900">{filteredCount.toLocaleString()}</strong> dari {totalCount.toLocaleString()} data transaksi
           </span>
 
           {isFiltered && (
@@ -157,108 +90,86 @@ export const FilterBar: React.FC<FilterBarProps> = ({
               className="inline-flex items-center gap-1 text-xs font-medium text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100/80 px-2.5 py-1 rounded-lg transition-colors cursor-pointer"
             >
               <RotateCcw className="w-3 h-3" />
-              <span>Reset Filter</span>
+              <span>Reset Slicer</span>
             </button>
           )}
         </div>
-
       </div>
 
-      {/* Secondary filter row: Brands, Jenis, Ukuran, Kota, Distributor dropdowns */}
-      <div className="pt-2.5 border-t border-slate-100 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5 text-xs">
+      {/* Slicer Dropdowns Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2.5">
         
-        {/* Brand Filter */}
-        <div>
-          <label className="block text-[10px] font-semibold uppercase text-slate-400 mb-1">Brand</label>
-          <div className="flex flex-wrap gap-1">
-            {availableBrands.slice(0, 4).map(b => {
-              const isSelected = filter.brands.includes(b);
-              return (
-                <button
-                  key={b}
-                  onClick={() => toggleBrand(b)}
-                  className={`px-1.5 py-0.5 rounded text-[11px] font-medium transition-colors ${
-                    isSelected ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
-                >
-                  {b}
-                </button>
-              );
-            })}
-          </div>
-        </div>
+        {/* 1. Tahun Dropdown */}
+        <MultiSelectDropdown
+          label="Tahun"
+          placeholder="Semua Tahun"
+          options={availableYears}
+          selected={filter.years}
+          onChange={(next) => onFilterChange({ ...filter, years: next })}
+          colorScheme="indigo"
+        />
 
-        {/* Jenis Filter */}
-        <div>
-          <label className="block text-[10px] font-semibold uppercase text-slate-400 mb-1">Jenis</label>
-          <div className="flex flex-wrap gap-1">
-            {availableJenis.map(j => {
-              const isSelected = filter.jenisList.includes(j);
-              return (
-                <button
-                  key={j}
-                  onClick={() => toggleJenis(j)}
-                  className={`px-1.5 py-0.5 rounded text-[11px] font-medium transition-colors ${
-                    isSelected ? 'bg-amber-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
-                >
-                  {j}
-                </button>
-              );
-            })}
-          </div>
-        </div>
+        {/* 2. Prinsipal Dropdown */}
+        <MultiSelectDropdown
+          label="Prinsipal"
+          placeholder="Semua Prinsipal"
+          options={availablePrinsipals}
+          selected={filter.prinsipals}
+          onChange={(next) => onFilterChange({ ...filter, calculatedPrinsipals: next,  prinsipals: next } as any)}
+          colorScheme="emerald"
+        />
 
-        {/* Ukuran Filter */}
-        <div>
-          <label className="block text-[10px] font-semibold uppercase text-slate-400 mb-1">Ukuran</label>
-          <div className="flex flex-wrap gap-1">
-            {availableUkuran.map(u => {
-              const isSelected = filter.ukuranList.includes(u);
-              return (
-                <button
-                  key={u}
-                  onClick={() => toggleUkuran(u)}
-                  className={`px-1.5 py-0.5 rounded text-[11px] font-medium transition-colors ${
-                    isSelected ? 'bg-cyan-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
-                >
-                  {u}
-                </button>
-              );
-            })}
-          </div>
-        </div>
+        {/* 3. Brand Dropdown */}
+        <MultiSelectDropdown
+          label="Brand"
+          placeholder="Semua Brand"
+          options={availableBrands}
+          selected={filter.brands}
+          onChange={(next) => onFilterChange({ ...filter, brands: next })}
+          colorScheme="indigo"
+        />
 
-        {/* Kota Select */}
-        <div>
-          <label className="block text-[10px] font-semibold uppercase text-slate-400 mb-1">Kota / Wilayah</label>
-          <select
-            value={filter.selectedKota}
-            onChange={(e) => onFilterChange({ ...filter, selectedKota: e.target.value })}
-            className="w-full bg-slate-50 border border-slate-200 rounded-md py-1 px-2 text-xs text-slate-700 focus:outline-none focus:border-indigo-500 cursor-pointer"
-          >
-            <option value="">Semua Kota ({availableCities.length})</option>
-            {availableCities.map(c => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-          </select>
-        </div>
+        {/* 4. Jenis Dropdown */}
+        <MultiSelectDropdown
+          label="Jenis"
+          placeholder="Semua Jenis"
+          options={availableJenis}
+          selected={filter.jenisList}
+          onChange={(next) => onFilterChange({ ...filter, jenisList: next })}
+          colorScheme="amber"
+        />
 
-        {/* Distributor Select */}
-        <div>
-          <label className="block text-[10px] font-semibold uppercase text-slate-400 mb-1">Distributor</label>
-          <select
-            value={filter.selectedDistributor}
-            onChange={(e) => onFilterChange({ ...filter, selectedDistributor: e.target.value })}
-            className="w-full bg-slate-50 border border-slate-200 rounded-md py-1 px-2 text-xs text-slate-700 focus:outline-none focus:border-indigo-500 cursor-pointer"
-          >
-            <option value="">Semua Distributor ({availableDistributors.length})</option>
-            {availableDistributors.map(d => (
-              <option key={d} value={d}>{d}</option>
-            ))}
-          </select>
-        </div>
+        {/* 5. Ukuran Dropdown */}
+        <MultiSelectDropdown
+          label="Ukuran"
+          placeholder="Semua Ukuran"
+          options={availableUkuran}
+          selected={filter.ukuranList}
+          onChange={(next) => onFilterChange({ ...filter, ukuranList: next })}
+          colorScheme="cyan"
+        />
+
+        {/* 6. Kota Dropdown */}
+        <MultiSelectDropdown
+          label="Kota / Wilayah"
+          placeholder="Semua Kota"
+          options={availableCities}
+          selected={selectedKotaList}
+          onChange={(next) => onFilterChange({ ...filter, kotaList: next, selectedKota: '' })}
+          colorScheme="slate"
+          enableSearch={true}
+        />
+
+        {/* 7. Distributor Dropdown */}
+        <MultiSelectDropdown
+          label="Distributor"
+          placeholder="Semua Distributor"
+          options={availableDistributors}
+          selected={selectedDistributorList}
+          onChange={(next) => onFilterChange({ ...filter, distributorList: next, selectedDistributor: '' })}
+          colorScheme="slate"
+          enableSearch={true}
+        />
 
       </div>
 

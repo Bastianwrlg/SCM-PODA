@@ -104,7 +104,7 @@ export const SyncModal: React.FC<SyncModalProps> = ({
               <Layers className="w-4 h-4 text-slate-500" />
               <div>
                 <div className="font-semibold text-slate-900">{kpis.totalBottles.toLocaleString()} Botol</div>
-                <div className="text-slate-500">Total 3 Tahun</div>
+                <div className="text-slate-500">Total Akumulasi</div>
               </div>
             </div>
           </div>

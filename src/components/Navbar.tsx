@@ -54,9 +54,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Live Data
                 </span>
               </div>
-              <p className="text-xs text-slate-500 hidden md:block">
-                3-Year Performance & Supply Chain Intelligence (2024 - 2026)
-              </p>
             </div>
           </div>
 

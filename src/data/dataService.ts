@@ -112,12 +112,14 @@ export function getLastFetchTime(): Date | null {
 
 export function filterSalesData(data: SalesRecord[], filter: FilterState): SalesRecord[] {
   return data.filter(item => {
-    if (filter.years.length > 0 && !filter.years.includes(item.tahun)) return false;
-    if (filter.prinsipals.length > 0 && !filter.prinsipals.includes(item.prinsipal)) return false;
-    if (filter.brands.length > 0 && !filter.brands.includes(item.brand)) return false;
-    if (filter.jenisList.length > 0 && !filter.jenisList.includes(item.jenis)) return false;
-    if (filter.ukuranList.length > 0 && !filter.ukuranList.includes(item.ukuran)) return false;
+    if (filter.years?.length > 0 && !filter.years.includes(item.tahun)) return false;
+    if (filter.prinsipals?.length > 0 && !filter.prinsipals.includes(item.prinsipal)) return false;
+    if (filter.brands?.length > 0 && !filter.brands.includes(item.brand)) return false;
+    if (filter.jenisList?.length > 0 && !filter.jenisList.includes(item.jenis)) return false;
+    if (filter.ukuranList?.length > 0 && !filter.ukuranList.includes(item.ukuran)) return false;
+    if (filter.kotaList?.length > 0 && !filter.kotaList.includes(item.kota)) return false;
     if (filter.selectedKota && item.kota !== filter.selectedKota) return false;
+    if (filter.distributorList?.length > 0 && !filter.distributorList.includes(item.distributor)) return false;
     if (filter.selectedDistributor && item.distributor !== filter.selectedDistributor) return false;
     if (filter.searchQuery) {
       const q = filter.searchQuery.toLowerCase();

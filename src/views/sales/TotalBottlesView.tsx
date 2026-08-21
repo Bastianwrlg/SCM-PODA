@@ -61,10 +61,10 @@ export const TotalBottlesView: React.FC<TotalBottlesViewProps> = ({ data }) => {
             <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">
               Sales Analytics
             </span>
-            <h1 className="text-xl font-bold text-slate-900">Total Penjualan per Botol (3 Tahun)</h1>
+            <h1 className="text-xl font-bold text-slate-900">Penjualan per Botol</h1>
           </div>
           <p className="text-xs text-slate-500 mt-1">
-            Metrik volume kumulatif unit botol, tren penjualan bulanan 2024-2026, dan sebaran ukuran kemasan.
+            Metrik volume kumulatif unit botol, tren penjualan bulanan, dan sebaran ukuran kemasan.
           </p>
         </div>
       </div>
@@ -75,7 +75,7 @@ export const TotalBottlesView: React.FC<TotalBottlesViewProps> = ({ data }) => {
           id="kpi-tb-grandtotal"
           title="Grand Total Penjualan"
           value={`${metrics.totalBottles.toLocaleString()} Botol`}
-          subtitle="Total agregat 36 bulan (2024 - 2026)"
+          subtitle="Total agregat seluruh periode"
           icon={Package}
           iconColor="text-indigo-600"
           iconBg="bg-indigo-50"
@@ -109,15 +109,15 @@ export const TotalBottlesView: React.FC<TotalBottlesViewProps> = ({ data }) => {
         />
       </div>
 
-      {/* Monthly Timeline Curve (36 Months) */}
+      {/* Monthly Timeline Curve */}
       <div className="bg-white rounded-xl border border-slate-200/90 p-5 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
           <div>
             <h2 className="text-sm font-bold text-slate-800">
-              Kurva Kecepatan Penjualan Botol Bulanan (2024 - 2026)
+              Kurva Kecepatan Penjualan Botol Bulanan
             </h2>
             <p className="text-xs text-slate-500">
-              Trayektori volume botol per bulan selama rentang 3 tahun penuh
+              Trayektori volume botol per bulan sepanjang periode pencatatan
             </p>
           </div>
         </div>
@@ -165,7 +165,7 @@ export const TotalBottlesView: React.FC<TotalBottlesViewProps> = ({ data }) => {
                 <th className="py-2.5 px-3 text-right font-mono">Tahun 2024</th>
                 <th className="py-2.5 px-3 text-right font-mono">Tahun 2025</th>
                 <th className="py-2.5 px-3 text-right font-mono">Tahun 2026</th>
-                <th className="py-2.5 px-3 text-right font-mono font-bold text-slate-900">Total 3 Tahun</th>
+                <th className="py-2.5 px-3 text-right font-mono font-bold text-slate-900">Total Akumulasi</th>
                 <th className="py-2.5 px-3 text-right font-mono text-slate-600">Rata-rata/Thn</th>
               </tr>
             </thead>

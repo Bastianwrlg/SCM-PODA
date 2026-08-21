@@ -81,10 +81,10 @@ export const QuarterlySalesView: React.FC<QuarterlySalesViewProps> = ({ data }) 
             <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">
               Sales Analytics
             </span>
-            <h1 className="text-xl font-bold text-slate-900">Jumlah Penjualan per Quarter (3 Tahun)</h1>
+            <h1 className="text-xl font-bold text-slate-900">Penjualan per Quarter</h1>
           </div>
           <p className="text-xs text-slate-500 mt-1">
-            Dinamika volume penjualan kuartalan 2024, 2025, dan 2026, analisis musiman, serta pertumbuhan YoY.
+            Dinamika volume penjualan kuartalan, analisis musiman, serta pertumbuhan QoQ dan YoY.
           </p>
         </div>
 
@@ -96,7 +96,7 @@ export const QuarterlySalesView: React.FC<QuarterlySalesViewProps> = ({ data }) 
               chartMode === 'grouped' ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            Timeline 12 Kuartal
+            Timeline Kuartal
           </button>
           <button
             onClick={() => setChartMode('yoy_compare')}
@@ -113,9 +113,9 @@ export const QuarterlySalesView: React.FC<QuarterlySalesViewProps> = ({ data }) 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <MetricCard
           id="kpi-qtr-total"
-          title="Total Penjualan 3 Tahun"
+          title="Total Penjualan"
           value={`${totalQuarterBottles.toLocaleString()} botol`}
-          subtitle="Akumulasi 12 Kuartal (2024-2026)"
+          subtitle="Akumulasi seluruh kuartal"
           icon={BarChart3}
           iconColor="text-indigo-600"
           iconBg="bg-indigo-50"
@@ -143,8 +143,8 @@ export const QuarterlySalesView: React.FC<QuarterlySalesViewProps> = ({ data }) 
         <MetricCard
           id="kpi-qtr-active"
           title="Periode Terdata"
-          value="12 Kuartal"
-          subtitle="2024 Q1 s/d 2026 Q4"
+          value={`${quarterlyData.filter(d => d.qty > 0).length} Kuartal`}
+          subtitle="Kuartal Aktif"
           icon={Calendar}
           iconColor="text-cyan-600"
           iconBg="bg-cyan-50"
@@ -157,7 +157,7 @@ export const QuarterlySalesView: React.FC<QuarterlySalesViewProps> = ({ data }) 
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
             <div>
               <h2 className="text-sm font-bold text-slate-800">
-                Grafik Penjualan Kuartalan Berjalan (2024 - 2026)
+                Grafik Penjualan Kuartalan Berjalan
               </h2>
               <p className="text-xs text-slate-500">
                 Volume botol per periode kuartal dengan indikator tren
@@ -228,7 +228,7 @@ export const QuarterlySalesView: React.FC<QuarterlySalesViewProps> = ({ data }) 
       <div className="bg-white rounded-xl border border-slate-200/90 p-5 shadow-xs">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h2 className="text-sm font-bold text-slate-800">Tabel Rincian Penjualan Kuartalan (3 Tahun)</h2>
+            <h2 className="text-sm font-bold text-slate-800">Tabel Rincian Penjualan Kuartalan</h2>
             <p className="text-xs text-slate-500">Data kuartal, volume botol, pertumbuhan QoQ & YoY</p>
           </div>
         </div>

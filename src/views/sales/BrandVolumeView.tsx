@@ -89,11 +89,11 @@ export const BrandVolumeView: React.FC<BrandVolumeViewProps> = ({ data }) => {
               Sales Analytics
             </span>
             <h1 className="text-xl font-bold text-slate-900">
-              Jumlah Penjualan per Brand per Volume (3 Tahun)
+              Volume per Brand
             </h1>
           </div>
           <p className="text-xs text-slate-500 mt-1">
-            Analisis preferensi kemasan volume botol (15ML, 30ML, 60ML) dan total liter likuid per brand (2024 - 2026).
+            Analisis preferensi kemasan volume botol (15ML, 30ML, 60ML) dan total liter cairan per brand.
           </p>
         </div>
 
@@ -124,7 +124,7 @@ export const BrandVolumeView: React.FC<BrandVolumeViewProps> = ({ data }) => {
           id="kpi-bv-total"
           title="Total Penjualan Botol"
           value={`${grandTotals.totalBottles.toLocaleString()} botol`}
-          subtitle="Akumulasi seluruh brand 3 tahun"
+          subtitle="Akumulasi seluruh brand"
           icon={Boxes}
           iconColor="text-indigo-600"
           iconBg="bg-indigo-50"

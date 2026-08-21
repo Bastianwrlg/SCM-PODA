@@ -108,10 +108,10 @@ export const ProductPercentageView: React.FC<ProductPercentageViewProps> = ({ da
             <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">
               Sales Analytics
             </span>
-            <h1 className="text-xl font-bold text-slate-900">Presentase per Produk (3 Tahun)</h1>
+            <h1 className="text-xl font-bold text-slate-900">Presentase Produk</h1>
           </div>
           <p className="text-xs text-slate-500 mt-1">
-            Analisis kontribusi pangsa pasar produk, rasio Pareto (80/20), dan peringkat volume per SKU (2024 - 2026).
+            Analisis kontribusi pangsa pasar produk, rasio Pareto (80/20), dan peringkat volume per SKU.
           </p>
         </div>
       </div>
@@ -122,7 +122,7 @@ export const ProductPercentageView: React.FC<ProductPercentageViewProps> = ({ da
           id="kpi-pp-total"
           title="Total Portofolio SKU"
           value={`${products.length} Produk`}
-          subtitle="Katalog aktif 3 tahun"
+          subtitle="Katalog aktif terdaftar"
           icon={Layers}
           iconColor="text-indigo-600"
           iconBg="bg-indigo-50"
@@ -271,7 +271,7 @@ export const ProductPercentageView: React.FC<ProductPercentageViewProps> = ({ da
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h2 className="text-sm font-bold text-slate-800">
-              Peringkat & Persentase Kontribusi per Produk (3 Tahun)
+              Peringkat & Persentase Kontribusi per Produk
             </h2>
             <p className="text-xs text-slate-500">
               Menampilkan {filteredProducts.length} produk terdaftar
@@ -333,7 +333,7 @@ export const ProductPercentageView: React.FC<ProductPercentageViewProps> = ({ da
                   onClick={() => handleSort('totalQty')}
                 >
                   <div className="flex items-center justify-end gap-1">
-                    Total 3 Thn <ArrowUpDown className="w-3 h-3 text-slate-400" />
+                    Total Penjualan <ArrowUpDown className="w-3 h-3 text-slate-400" />
                   </div>
                 </th>
                 <th 

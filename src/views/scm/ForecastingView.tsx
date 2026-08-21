@@ -81,7 +81,7 @@ export const ForecastingView: React.FC<ForecastingViewProps> = ({ data }) => {
             <h1 className="text-xl font-bold text-slate-900">Demand Forecasting & Inventory Planning</h1>
           </div>
           <p className="text-xs text-slate-500 mt-1">
-            Proyeksi kebutuhan stok, Safety Stock, dan Reorder Point (ROP) berbasis time-series 3 tahun.
+            Proyeksi kebutuhan stok, Safety Stock, dan Reorder Point (ROP) berbasis time-series historis.
           </p>
         </div>
 

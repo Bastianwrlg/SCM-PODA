@@ -8,7 +8,6 @@ import {
   MapPin, 
   Package, 
   Boxes,
-  Sparkles,
   ChevronRight
 } from 'lucide-react';
 import { MenuType, SubMenuType } from '../types';
@@ -56,32 +55,32 @@ export const Sidebar: React.FC<SidebarProps> = ({
       items: [
         {
           id: 'quarterly_sales' as SubMenuType,
-          label: 'JUMLAH PENJUALAN PER QUARTER (3 TAHUN)',
-          desc: 'Quarterly trends & YoY comparison',
+          label: 'Penjualan per Quarter',
+          desc: 'Tren kuartalan & komparasi YoY',
           icon: BarChart3
         },
         {
           id: 'city_distri_principal' as SubMenuType,
-          label: 'JUMLAH PENJUALAN PER SEGMEN KOTA PER DISTRI PER PRINSIPAL',
-          desc: 'Multi-tier matrix & drilldowns',
+          label: 'Kota, Distri & Prinsipal',
+          desc: 'Matriks segmen wilayah & distributor',
           icon: MapPin
         },
         {
           id: 'brand_volume' as SubMenuType,
-          label: 'JUMLAH PENJUALAN PER BRAND PER VOLUME (3 TAHUN)',
-          desc: '15ml, 30ml, 60ml & liter metrics',
+          label: 'Volume per Brand',
+          desc: 'Distribusi ukuran kemasan & liter',
           icon: Boxes
         },
         {
           id: 'product_percentage' as SubMenuType,
-          label: 'Presentase per produk 3 tahun',
-          desc: 'Pareto 80/20 & market share',
+          label: 'Presentase Produk',
+          desc: 'Analisis Pareto 80/20 & pangsa pasar',
           icon: PieChart
         },
         {
           id: 'total_bottles' as SubMenuType,
-          label: 'Total penjualan per botol 3 tahun',
-          desc: '3.6M+ bottle volume & heatmaps',
+          label: 'Penjualan per Botol',
+          desc: 'Volume botol bulanan & heatmap',
           icon: Package
         }
       ]
@@ -172,17 +171,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
             </div>
           ))}
-        </div>
-
-        {/* Footer info card */}
-        <div className="p-3.5 m-3 rounded-xl bg-slate-50 border border-slate-200/70 text-xs">
-          <div className="flex items-center gap-2 text-slate-700 font-semibold mb-1">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
-            <span>Multi-Year Dataset</span>
-          </div>
-          <p className="text-[11px] text-slate-500 leading-relaxed">
-            Data mencakup periode 2024 - 2026 dari Google Spreadsheet terintegrasi.
-          </p>
         </div>
       </aside>
     </>

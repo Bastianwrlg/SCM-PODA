@@ -72,7 +72,7 @@ export const CityDistriPrincipalView: React.FC<CityDistriPrincipalViewProps> = (
               Sales Analytics
             </span>
             <h1 className="text-xl font-bold text-slate-900">
-              Jumlah Penjualan per Segmen Kota per Distri per Prinsipal
+              Kota, Distri & Prinsipal
             </h1>
           </div>
           <p className="text-xs text-slate-500 mt-1">

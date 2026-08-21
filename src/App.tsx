@@ -48,6 +48,8 @@ export default function App() {
     brands: [],
     jenisList: [],
     ukuranList: [],
+    kotaList: [],
+    distributorList: [],
     selectedKota: '',
     selectedDistributor: '',
     searchQuery: ''
@@ -267,6 +269,8 @@ export default function App() {
                   brands: [],
                   jenisList: [],
                   ukuranList: [],
+                  kotaList: [],
+                  distributorList: [],
                   selectedKota: '',
                   selectedDistributor: '',
                   searchQuery: ''
